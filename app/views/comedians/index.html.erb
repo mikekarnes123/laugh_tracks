@@ -10,7 +10,7 @@
         <li><%= comedian.age %></li>
         <li><%= comedian.city %></li>
     </ul>
-    <h5>Specials:</h5>
+    <h5>Number of Specials: <%= comedian.number_of_specials %></h5>
     <% comedian.specials.each do |special| %>
     <p>
       Title: <%= special.title %>

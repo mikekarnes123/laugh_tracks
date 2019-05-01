@@ -22,6 +22,7 @@ RSpec.describe 'comedian index page', type: :feature do
   end
 
   it 'has special title and run time for each comedian' do
+    
     @jerry.specials.create(title: "idk", run_time: 100)
     @jerry.specials.create(title: "other special", run_time: 50)
 
@@ -35,6 +36,7 @@ RSpec.describe 'comedian index page', type: :feature do
 
 
   it 'has thumbnail images for comedians' do
+
     visit comedians_path
 
     within("##{@jerry.id}") do
@@ -44,17 +46,28 @@ RSpec.describe 'comedian index page', type: :feature do
 
   it 'has thumbnail images for comedians' do
 
-     visit comedians_path(:age => @jerry.age)
-
-     expect(page).to have_content("Jerry")
-     expect(page).to_not have_content("Bob")
-     expect(page).to_not have_content("Rob")
-
      visit '/comedians?age=50'
 
      expect(page).to have_content("Jerry")
      expect(page).to_not have_content("Bob")
      expect(page).to_not have_content("Rob")
+  end
 
+  it 'should have number of specials for each comedian' do
+
+    @jerry.specials.create(title: "idk", run_time: 100)
+    @jerry.specials.create(title: "other special", run_time: 50)
+    @bob.specials.create(title: "extra special", run_time: 90)
+
+    visit comedians_path
+
+    within("##{@jerry.id}") do
+      number_of_specials = @jerry.specials.count
+      expect(page).to have_content("Number of Specials: #{number_of_specials}")
+    end
+    within("##{@bob.id}") do
+      number_of_specials = @bob.specials.count
+      expect(page).to have_content("Number of Specials: #{number_of_specials}")
+    end
   end
 end
