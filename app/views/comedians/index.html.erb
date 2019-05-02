@@ -3,6 +3,9 @@
 <body>
   <div class="stats-box">
     Stats:
+    <% if @comedians.same_age? %>
+    Comedians: <%= @comedians.pluck(:name).uniq.join(', ') %>
+    <% end %>
     Average Age: <%= @comedians.average(:age).round %>
     Home Towns: <%= @comedians.pluck(:city).uniq.join(', ') %>
   </div>
