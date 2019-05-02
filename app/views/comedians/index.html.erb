@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <h1>Comedians</h1>
 <body>
+  <div class="stats-box">
+    Stats:
+    Average Age: <%= @comedians.average(:age).round %>
+    Home Towns: <%= @comedians.pluck(:city).uniq.join(', ') %>
+  </div>
   <% @comedians.each do |comedian| %>
     <div id = "<%= comedian.id %>"
     <h3><%= comedian.name %></h3>
