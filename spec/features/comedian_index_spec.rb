@@ -92,6 +92,6 @@ RSpec.describe 'comedian index page', type: :feature do
 
     visit comedians_path(:age => 50)
 
-    expect(page).to have_content('Comedians: Joey, Jerry')
+    expect(page).to have_content('Comedians: Jerry, Joey')
   end
 end
