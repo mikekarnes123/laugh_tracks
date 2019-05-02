@@ -13,8 +13,12 @@ class ComediansController < ApplicationController
   end
 
   def create
-    Comedian.create(comedian_params)
-    redirect_to comedians_path
+    @comedian = Comedian.new(comedian_params)
+    if @comedian.save
+      redirect_to comedians_path
+      return
+    end
+    redirect_to new_comedian_path
   end
 
   private
