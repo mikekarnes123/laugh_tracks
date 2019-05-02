@@ -14,6 +14,10 @@ class Comedian < ApplicationRecord
     end
   end
 
+  def self.same_age?
+    pluck(:age).uniq.count == 1
+  end
+
   def number_of_specials
     specials.count
   end

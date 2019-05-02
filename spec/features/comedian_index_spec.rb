@@ -86,4 +86,12 @@ RSpec.describe 'comedian index page', type: :feature do
     expect(page).to have_content('Average Age: 50')
     expect(page).to have_content('Home Towns: no idea')
   end
+
+  it 'age query routes should show all comedians with same age' do
+    Comedian.create(name: "Joey", age: 50, city: "big city", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jerry_Seinfeld_2016_-_2.jpg/220px-Jerry_Seinfeld_2016_-_2.jpg")
+
+    visit comedians_path(:age => 50)
+
+    expect(page).to have_content('Comedians: Jerry, Joey')
+  end
 end
