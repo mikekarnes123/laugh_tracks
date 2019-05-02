@@ -75,7 +75,7 @@ RSpec.describe 'comedian index page', type: :feature do
     visit comedians_path
 
     expect(page).to have_content('Stats:')
-    expect(page).to have_content('Average Age: 40')
+    expect(page).to have_content('Average Age: 34')
     expect(page).to have_content('Home Towns: no idea, some city')
   end
 

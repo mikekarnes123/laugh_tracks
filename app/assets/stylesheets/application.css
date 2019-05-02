@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.stats-box {
+  display: flex;
+  flex-direction: column;
+}
