@@ -4,7 +4,7 @@ RSpec.describe 'comedian index page', type: :feature do
   before :each do
     @jerry = Comedian.create(name: "Jerry", age: 50, city: "no idea", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jerry_Seinfeld_2016_-_2.jpg/220px-Jerry_Seinfeld_2016_-_2.jpg")
     @bob = Comedian.create(name: "Bob", age: 21, city: "some city", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jerry_Seinfeld_2016_-_2.jpg/220px-Jerry_Seinfeld_2016_-_2.jpg")
-    @rob = Comedian.create(name: "Rob", age: 30, city: "different city", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jerry_Seinfeld_2016_-_2.jpg/220px-Jerry_Seinfeld_2016_-_2.jpg")
+    @rob = Comedian.create(name: "Rob", age: 30, city: "some city", thumbnail: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jerry_Seinfeld_2016_-_2.jpg/220px-Jerry_Seinfeld_2016_-_2.jpg")
   end
   it 'has comedian info' do
 
@@ -22,7 +22,7 @@ RSpec.describe 'comedian index page', type: :feature do
   end
 
   it 'has special title and run time for each comedian' do
-    
+
     @jerry.specials.create(title: "idk", run_time: 100)
     @jerry.specials.create(title: "other special", run_time: 50)
 
@@ -69,5 +69,21 @@ RSpec.describe 'comedian index page', type: :feature do
       number_of_specials = @bob.specials.count
       expect(page).to have_content("Number of Specials: #{number_of_specials}")
     end
+  end
+
+  it 'should have stats box for comedians' do
+    visit comedians_path
+
+    expect(page).to have_content('Stats:')
+    expect(page).to have_content('Average Age: 40')
+    expect(page).to have_content('Home Towns: no idea, some city')
+  end
+
+  it 'stats should reflect displayed comedians' do
+    visit comedians_path(:age => 50)
+
+    expect(page).to have_content('Stats:')
+    expect(page).to have_content('Average Age: 50')
+    expect(page).to have_content('Home Towns: no idea')
   end
 end
