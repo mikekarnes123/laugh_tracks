@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <h1>Comedians</h1>
 <body>
-  <div class="stats-box">
+  <div class="stats-box" style="align-top; margin-bottom: 3%; border: solid;">
     Stats:
     <% if @comedians.same_age? %>
-    Comedians: <%= @comedians.pluck(:name).uniq.join(', ') %>
+    <div>Comedians: <%= @comedians.pluck(:name).uniq.join(', ') %></div>
     <% end %>
-    Average Age: <%= @comedians.average(:age).round %>
-    Home Towns: <%= @comedians.pluck(:city).uniq.join(', ') %>
+    <div>Average Age: <%= @comedians.average(:age).round %></div>
+    <div>Home Towns: <%= @comedians.pluck(:city).uniq.join(', ') %></div>
   </div>
   <% @comedians.each do |comedian| %>
-    <div id = "<%= comedian.id %>"
-    <h3><%= comedian.name %></h3>
+    <div id = "<%= comedian.id %>" class="justify-content-center" style="margin: 3%; border: solid;">
+    <h3 style='font-weight: bold;'><%= comedian.name %></h3>
 
     <ul>
-        <li><img src= "<%= comedian.thumbnail %>"></li>
-        <li><%= comedian.age %></li>
-        <li><%= comedian.city %></li>
+        <div><img src= "<%= comedian.thumbnail %>" width=300></div>
+        <li>Age: <%= comedian.age %></li>
+        <li>Hometown: <%= comedian.city %></li>
     </ul>
     <h5>Number of Specials: <%= comedian.number_of_specials %></h5>
     <% comedian.specials.each do |special| %>
     <p>
       Title: <%= special.title %>
+      <br>
       Run Time: <%= special.run_time %>
+      <br>
+      <img src= "<%= special.image_url %>" width=100>
     <% end %>
     </div>
   <% end %>
